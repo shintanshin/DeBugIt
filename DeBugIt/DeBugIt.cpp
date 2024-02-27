@@ -3,19 +3,22 @@
 #include <iostream>
 #include <algorithm>
 #include "Monster.h"
+#include "Base.h"
 
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(800, 600), "DeBugIt");
 
     sf::Texture backgroundTexture;
-    backgroundTexture.loadFromFile("LvlTexture.png");
+    backgroundTexture.loadFromFile("MapTexture.png");
     sf::Sprite LvlTexture(backgroundTexture);
-    LvlTexture.setScale({ 0.63f, 0.7f });
 
     Bee bee;
-    sf::Clock clock;
     bee.setScale();
+    Base base;
+    base.setScale();
+
+    sf::Clock clock;
 
     while (window.isOpen())
     {
@@ -32,14 +35,15 @@ int main()
                     window.close();
             }
 
-            //float deltaTime = clock.restart().asSeconds();
-            float deltaTime = 0.2f;
-            bee.update(deltaTime);
+        }
+            float deltaTime = clock.restart().asSeconds();
+            //float deltaTime = 0.5f;
+            bee.update(deltaTime*5);
 
             window.clear();
             window.draw(LvlTexture);
+            base.draw(window);
             bee.draw(window);
             window.display();
-        }
     }
 }
