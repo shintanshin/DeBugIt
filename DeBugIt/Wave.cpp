@@ -158,30 +158,37 @@ FirstWave::FirstWave(unsigned int numMonsters)
 
 void FirstWave::update(float deltaTime)
 {
+    //auto it = monsters.begin();
 
-    for (auto& monster : monsters) //It works THE BEST!
+    //for (auto& monster : monsters) //It works THE BEST!
+    //{
+    //    monster->update(deltaTime);
+    //    moveTo(*monster, m_targets[monster->getPathIdx()], deltaTime);
+
+    //    if (monster->getPosition() == m_targets[monster->getPathIdx()]) {
+    //        monster->setPathIdx((monster->getPathIdx() + 1) % m_targets.size());
+    //    }
+    //}
+
+    for (auto it = monsters.begin(); it != monsters.end();)
     {
+        auto& monster = *it;
         monster->update(deltaTime);
         moveTo(*monster, m_targets[monster->getPathIdx()], deltaTime);
 
         if (monster->getPosition() == m_targets[monster->getPathIdx()]) {
-            monster->setPathIdx((monster->getPathIdx() + 1) % m_targets.size());
+            if (monster->getPathIdx() == m_targets.size() - 1) {
+                it = monsters.erase(it);
+            }
+            else {
+                monster->setPathIdx((monster->getPathIdx() + 1) % m_targets.size());
+                ++it;
+            }
+        }
+        else {
+            ++it;
         }
     }
-
-
-    //for (auto& monster : monsters) //It works base!
-    //{
-    //    sf::Vector2f targetPosition = m_targets[m_currentTargetIndex];
-
-    //    monster->update(deltaTime);
-    //    moveTo(*monster, m_targets[m_currentTargetIndex], deltaTime);
-
-    //    if (monster->getPosition() == m_targets[m_currentTargetIndex]) {
-    //        m_currentTargetIndex = (m_currentTargetIndex + 1) % m_targets.size();
-    //    }
-    //}
-   
 }
 
 void FirstWave::draw(sf::RenderWindow& window)
