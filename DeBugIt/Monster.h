@@ -12,7 +12,9 @@ public:
     virtual void setPosition(const sf::Vector2f& position) = 0;
     //virtual void moveTo(sf::Vector2f target, float deltaTime) = 0;
 
-    //virtual std::vector<sf::Vector2f> getTargets() const = 0; 
+    virtual int getPathIdx()=0;
+    virtual void setPathIdx(int idx) = 0;
+
     virtual void setTargets(const std::vector<sf::Vector2f>& targets) = 0;
     virtual float getSpeed() = 0;
 
@@ -50,12 +52,16 @@ public:
         m_movementTimer = timer;
     }
 
+    int getPathIdx() override{return m_pathIdx;}
+    void setPathIdx(int idx) override { m_pathIdx = idx; }
+
+
 private:
     std::vector<sf::Texture> m_texturesBee;
     sf::Sprite m_spriteBee;
     float m_frameDuration;
     float m_elapsed;
-    unsigned int m_currentTextureIndex;
+    int m_currentTextureIndex;
     float m_speed;
 
     std::vector<sf::Vector2f> targets;
@@ -74,6 +80,8 @@ private:
     }*/
 
     int m_numHealth;
+    int m_pathIdx;
+
 };
 
 class PurpleBug : public Monster
@@ -110,6 +118,8 @@ public:
         m_movementTimer = timer;
     }
     
+    int getPathIdx() override { return m_pathIdx; }
+    void setPathIdx(int idx) override { m_pathIdx = idx; }
 
 private:
     std::vector<sf::Texture> m_texturesBug;
@@ -136,4 +146,6 @@ private:
     }*/
 
     int m_numHealth;
+
+    int m_pathIdx;
 };

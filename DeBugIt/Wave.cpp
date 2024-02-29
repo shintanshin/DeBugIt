@@ -158,37 +158,30 @@ FirstWave::FirstWave(unsigned int numMonsters)
 
 void FirstWave::update(float deltaTime)
 {
-    m_monsterCreationTimer += deltaTime;
 
-    for (auto& monster : monsters) //It works!
+    for (auto& monster : monsters) //It works THE BEST!
     {
-        sf::Vector2f targetPosition = m_targets[m_currentTargetIndex];
-
         monster->update(deltaTime);
-        moveTo(*monster, m_targets[m_currentTargetIndex], deltaTime);
+        moveTo(*monster, m_targets[monster->getPathIdx()], deltaTime);
 
-        if (monster->getPosition() == m_targets[m_currentTargetIndex]) {
-            m_currentTargetIndex = (m_currentTargetIndex + 1) % m_targets.size();
+        if (monster->getPosition() == m_targets[monster->getPathIdx()]) {
+            monster->setPathIdx((monster->getPathIdx() + 1) % m_targets.size());
         }
-        
     }
 
-    //for (auto& monster : monsters) {
-    //    float monsterTimer = monster->getMovementTimer();
 
-    //    // Викликайте moveTo для кожного монстра
-    //    moveTo(*monster, m_targets[m_currentTargetIndex], deltaTime);
+    //for (auto& monster : monsters) //It works base!
+    //{
+    //    sf::Vector2f targetPosition = m_targets[m_currentTargetIndex];
 
     //    monster->update(deltaTime);
+    //    moveTo(*monster, m_targets[m_currentTargetIndex], deltaTime);
 
     //    if (monster->getPosition() == m_targets[m_currentTargetIndex]) {
     //        m_currentTargetIndex = (m_currentTargetIndex + 1) % m_targets.size();
-    //        monsterTimer = 0.0f;  // Скидання таймера тільки після досягнення цільової позиції
     //    }
-
-    //    monster->setMovementTimer(monsterTimer);
     //}
-
+   
 }
 
 void FirstWave::draw(sf::RenderWindow& window)

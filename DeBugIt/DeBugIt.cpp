@@ -6,6 +6,7 @@
 #include "Base.h"
 #include "Wave.h"
 #include "BuildPlace.h"
+#include "Tower.h"
 
 int main()
 {
@@ -14,6 +15,9 @@ int main()
     sf::Texture backgroundTexture;
     backgroundTexture.loadFromFile("Textures/MapTexture.png");
     sf::Sprite LvlTexture(backgroundTexture);
+
+    PotatoTower potatoT;
+    potatoT.setScale();
 
     Bee bee;
     //bee.setScale();
@@ -57,6 +61,8 @@ int main()
             window.draw(LvlTexture);
             base.draw(window);
             place.draw(window);
+            //potatoT.draw(window);
+
             //bug.draw(window);
             wave.draw(window);
             //wave.draw(window);
