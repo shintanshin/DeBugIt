@@ -3,102 +3,6 @@
 #include <iostream>
 #include <chrono>
 
-
-//FirstWave::FirstWave():m_currentTextureIndex(0), m_elapsed(0.0f), m_speed(10.0f) 
-//{
-//    targets = { sf::Vector2f(40, 100), sf::Vector2f(290, 100), sf::Vector2f(290, 285),
-//            sf::Vector2f(165, 285), sf::Vector2f(165, 410), sf::Vector2f(590, 410) };
-//
-//    sf::Vector2f initialPosition = m_purpleBug->getPosition();
-//    m_spritePurpleBug.setPosition(initialPosition);
-//}
-//
-////FirstWave::FirstWave(PurpleBug* monster, float speed)
-////    : m_purpleBug(monster), m_speed(speed)
-////{
-////	targets = { sf::Vector2f(40, 100), sf::Vector2f(290, 100), sf::Vector2f(290, 285),
-////			sf::Vector2f(165, 285), sf::Vector2f(165, 410), sf::Vector2f(590, 410) };
-////
-////    sf::Vector2f initialPosition = m_purpleBug->getPosition();
-////    m_spritePurpleBug.setPosition(initialPosition);
-////}
-//
-//void FirstWave::update(float deltaTime)
-//{
-//    m_purpleBug->update(deltaTime);
-//
-//    m_elapsed += deltaTime;
-//
-//    if (m_elapsed >= m_purpleBug->getFrameDuration())
-//    {
-//        m_currentTextureIndex = (m_purpleBug->getCurrentTextureIndex() + 1) % m_purpleBug->getTextures().size();
-//        m_spritePurpleBug.setTexture(m_purpleBug->getTextures()[m_currentTextureIndex]);
-//        m_elapsed = 0.0f;
-//    }
-//    if (m_spritePurpleBug.getPosition() == targets[currentTargetIndex])
-//    {
-//        currentTargetIndex = (currentTargetIndex + 1) % targets.size();
-//    }
-//}
-//
-//void FirstWave::moveTo(sf::Vector2f target, float deltaTime)
-//{
-//    
-//        sf::Vector2f currentPosition = m_spritePurpleBug.getPosition();
-//
-//        if (currentPosition == target)
-//        {
-//            return;
-//        }
-//
-//        sf::Vector2f direction = target - currentPosition;
-//        direction = normalize(direction);  
-//
-//        float distance = length(direction);
-//        float movement = m_speed * deltaTime;
-//
-//        m_spritePurpleBug.setPosition(currentPosition + direction * movement);
-//       
-//}
-//
-//sf::Vector2f FirstWave::normalize(const sf::Vector2f& vector)
-//{
-//    float length = std::sqrt(vector.x * vector.x + vector.y * vector.y);
-//
-//    if (length != 0.0f)
-//    {
-//        return sf::Vector2f(vector.x / length, vector.y / length);
-//    }
-//    else
-//    {
-//        return vector; 
-//    }
-//}
-
-FirstWave::FirstWave()
-    :m_currentTargetIndex(0), m_monsterCreationTimer(0.0f)
-{
-    m_targets = { sf::Vector2f(40, 100), sf::Vector2f(290, 100), sf::Vector2f(290, 285),
-                    sf::Vector2f(165, 285), sf::Vector2f(165, 410), sf::Vector2f(590, 410) };
-
-   
-    std::unique_ptr<Bee> bee1 = std::make_unique<Bee>( 10.0f, sf::Vector2f(100.0f, 200.0f), 10 );
-    bee1->setScale();
-    m_monstersWave1DB.push_back(bee1.get());
-
-    std::unique_ptr<Bee> bee2 = std::make_unique<Bee>(10.0f, sf::Vector2f(150.0f, 200.0f), 10 );
-    bee2->setScale();
-    m_monstersWave1DB.push_back(bee2.get());
-
-    std::unique_ptr<Bee> bee3 = std::make_unique<Bee>(10.0f, sf::Vector2f(200.0f, 200.0f), 10) ;
-    bee3->setScale();
-    m_monstersWave1DB.push_back(bee3.get());
-
-    std::unique_ptr<Bee> bee4 = std::make_unique<Bee>(10.0f, sf::Vector2f(250.0f, 200.0f), 10) ;
-    bee4->setScale();
-    m_monstersWave1DB.push_back(bee4.get());
-}
-
 FirstWave::FirstWave(unsigned int numMonsters)
     :m_currentTargetIndex(0), m_monsterCreationTimer(0.0f)
 {
@@ -158,19 +62,7 @@ FirstWave::FirstWave(unsigned int numMonsters)
 
 void FirstWave::update(float deltaTime)
 {
-    //auto it = monsters.begin();
-
-    //for (auto& monster : monsters) //It works THE BEST!
-    //{
-    //    monster->update(deltaTime);
-    //    moveTo(*monster, m_targets[monster->getPathIdx()], deltaTime);
-
-    //    if (monster->getPosition() == m_targets[monster->getPathIdx()]) {
-    //        monster->setPathIdx((monster->getPathIdx() + 1) % m_targets.size());
-    //    }
-    //}
-
-    for (auto it = monsters.begin(); it != monsters.end();)
+    for (auto it = monsters.begin(); it != monsters.end();) //It works THE BEST!
     {
         auto& monster = *it;
         monster->update(deltaTime);
@@ -198,10 +90,6 @@ void FirstWave::draw(sf::RenderWindow& window)
         monster->draw(window);
     }
 
-    /*for (const auto& monster : m_monstersWave1DB)
-    {
-        monster->draw(window);
-    }*/
 }
 
 sf::Vector2f FirstWave::normalize(const sf::Vector2f& vector)

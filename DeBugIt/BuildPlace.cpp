@@ -1,7 +1,16 @@
 ﻿#include "BuildPlace.h"
 #include "Tower.h"
+#include <iostream>
 
-void BuildPlace::handleEvent(sf::Event& event, sf::RenderWindow& window)
+
+BuildPlace::BuildPlace()
+{
+    m_textureBuildPlace.loadFromFile("Textures/PlaceForTower.png");
+    m_spriteBuildPlace.setTexture(m_textureBuildPlace);
+    setPosition(sf::Vector2f(353, 115));
+}
+
+void BuildPlace::handleEvent(sf::Event& event, sf::RenderWindow& window, TowerMenu& towerMenu)
 {
     if (event.type == sf::Event::MouseButtonPressed) {
         if (event.mouseButton.button == sf::Mouse::Left) {
@@ -11,10 +20,19 @@ void BuildPlace::handleEvent(sf::Event& event, sf::RenderWindow& window)
             // Перевірка, чи клік був на спрайті BuildPlace
             if (bounds.contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y))) {
                 // Тут ви можете викликати код для вибору башти (наприклад, вибір PotatoTower)
-                Tower* selectedTower = new PotatoTower();
-                selectedTower->setPosition(m_spriteBuildPlace.getPosition());
-                // Додайте код для додавання вибраної башти до гри або обробки інших подій
+                towerMenu.handleSelection(mousePosition, window);
+                Tower* selectedTower = towerMenu.getSelectedTower();
+
+                towerMenu.setDrawEnabled(true);
+                std::cout << "Button PRESSED";
+               
             }
         }
     }
+}
+
+bool BuildPlace::isClicked(const sf::Vector2i& mousePosition) const
+{
+    sf::FloatRect bounds = m_spriteBuildPlace.getGlobalBounds();
+    return bounds.contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y));
 }

@@ -8,6 +8,7 @@
 #include "Wave.h"
 #include "BuildPlace.h"
 #include "Tower.h"
+#include "Menu.h"
 
 
 void Game::run()
@@ -19,16 +20,19 @@ void Game::run()
     sf::Sprite LvlTexture(backgroundTexture);
 
     BuildPlace buildPlace;
+    TowerMenu towerSelection;
 
     PotatoTower potatoT;
     potatoT.setScale();
+    CornTower corn;
 
-    Bee bee;
 
     Base base;
     base.setScale();
     BuildPlace place;
 
+
+    Bee bee;
     PurpleBug bug;
     FirstWave wave(6);
 
@@ -50,21 +54,28 @@ void Game::run()
                     window.close();
                 break;
             case sf::Event::MouseButtonPressed:
-                buildPlace.handleEvent(event, window);
+                buildPlace.handleEvent(event, window, towerSelection);
                 break;
             }
 
         }
         float deltaTime = clock.restart().asSeconds();
-        bee.update(deltaTime * 5);
+       //bee.update(deltaTime * 5);
 
         //bug.update(deltaTime *5);
         wave.update(deltaTime * 5);
+
+        //potatoT.update(deltaTime);
+
+       
 
         window.clear();
         window.draw(LvlTexture);
         base.draw(window);
         place.draw(window);
+        towerSelection.draw(window);
+
+        //corn.draw(window);
 
         wave.draw(window);
         window.display();

@@ -10,17 +10,12 @@ public:
     virtual void setScale() = 0;
     virtual sf::Vector2f getPosition() const = 0;
     virtual void setPosition(const sf::Vector2f& position) = 0;
-    //virtual void moveTo(sf::Vector2f target, float deltaTime) = 0;
 
     virtual int getPathIdx()=0;
     virtual void setPathIdx(int idx) = 0;
 
     virtual void setTargets(const std::vector<sf::Vector2f>& targets) = 0;
     virtual float getSpeed() = 0;
-
-    virtual float getMovementTimer() const = 0;
-    virtual void setMovementTimer(float timer) = 0;
-
 private:
     sf::Texture m_texture;
     sf::Sprite m_sprite;
@@ -30,7 +25,6 @@ class Bee : public Monster
 {
 public:
     Bee(); 
-    Bee(float speed, const sf::Vector2f& position, int health);
    
     void update(float deltaTime) override;  // метод для оновлення анімації
     void draw(sf::RenderWindow& window) override { window.draw(m_spriteBee); }  // метод для відображення монстра
@@ -44,13 +38,6 @@ public:
     //virtual void setTargets(const std::vector<sf::Vector2f>& newTargets) override { }
 
     float getSpeed() override { return m_speed; }
-    float getMovementTimer() const {
-        return m_movementTimer;
-    }
-
-    void setMovementTimer(float timer) {
-        m_movementTimer = timer;
-    }
 
     int getPathIdx() override{return m_pathIdx;}
     void setPathIdx(int idx) override { m_pathIdx = idx; }
@@ -93,10 +80,6 @@ public:
     void draw(sf::RenderWindow& window) override { window.draw(m_spritePurpleBug); }
     void setScale() { m_spritePurpleBug.setScale(0.7f, 0.7f); }
 
-    //void moveTo(sf::Vector2f target, float deltaTime);
-    sf::Vector2f normalize(const sf::Vector2f& vector);
-    float length(const sf::Vector2f& vector){return std::sqrt(vector.x * vector.x + vector.y * vector.y);}
-
     sf::Vector2f getPosition() const { return m_spritePurpleBug.getPosition(); }
     void setPosition(const sf::Vector2f& position) { m_spritePurpleBug.setPosition(position); }
 
@@ -110,14 +93,6 @@ public:
 
     float getSpeed() override { return m_speed; }
 
-    float getMovementTimer() const {
-        return m_movementTimer;
-    }
-
-    void setMovementTimer(float timer) {
-        m_movementTimer = timer;
-    }
-    
     int getPathIdx() override { return m_pathIdx; }
     void setPathIdx(int idx) override { m_pathIdx = idx; }
 
