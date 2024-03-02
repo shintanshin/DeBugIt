@@ -21,4 +21,6 @@ private:
 
 	sf::Texture m_textureBuildPlace;
 	sf::Sprite m_spriteBuildPlace;
+
+	Tower* m_selectedTower;
 };

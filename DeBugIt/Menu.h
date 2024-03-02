@@ -59,11 +59,12 @@ public:
     Tower* getSelectedTower() const;
 
     void setDrawEnabled(bool drawEnabled) { m_drawEnabled = drawEnabled;}
+    bool getDrawEnabled() const { return m_drawEnabled; }
     void addTower(Tower* tower) {m_towers.push_back(tower);}
 
     void handleEvent(sf::Event& event, sf::RenderWindow& window);
 
-    void arrangeTowers();
+    //void arrangeTowers();
     void arrangeTowers(const std::vector<sf::Vector2f>& positions);
 private:
     std::vector<Tower*> m_towers;

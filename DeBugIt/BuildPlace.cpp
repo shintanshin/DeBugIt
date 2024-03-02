@@ -20,11 +20,11 @@ void BuildPlace::handleEvent(sf::Event& event, sf::RenderWindow& window, TowerMe
             // Перевірка, чи клік був на спрайті BuildPlace
             if (bounds.contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y))) {
                 // Тут ви можете викликати код для вибору башти (наприклад, вибір PotatoTower)
+                std::cout << "Button PRESSED";
                 towerMenu.handleSelection(mousePosition, window);
                 Tower* selectedTower = towerMenu.getSelectedTower();
 
                 towerMenu.setDrawEnabled(true);
-                std::cout << "Button PRESSED";
                
             }
         }

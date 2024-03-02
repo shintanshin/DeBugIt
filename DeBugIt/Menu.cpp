@@ -11,13 +11,25 @@ void TowerMenuItem::draw(sf::RenderWindow& window)
 
 void TowerMenuItem::handleEvent(sf::Vector2i mousePosition, sf::RenderWindow& window)
 {
-    sf::FloatRect bounds = m_sprite.getGlobalBounds();
-    m_isSelected = bounds.contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y));
+    //sf::FloatRect bounds = m_sprite.getGlobalBounds();
+    //m_isSelected = bounds.contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y));
+    //std::cout << "Button PRESSED";
+    //// Перевірте, чи було вибрано башту, і встановіть позицію, якщо так
+    //if (m_isSelected) {
+    //    m_selectedTower = createTower();
+    //    m_selectedTowerPosition = m_sprite.getPosition();
+    //}
 
-    // Перевірте, чи було вибрано башту, і встановіть позицію, якщо так
-    if (m_isSelected) {
-        m_selectedTower = createTower();
-        m_selectedTowerPosition = m_sprite.getPosition();
+    if (!m_isSelected) {
+        sf::FloatRect bounds = m_sprite.getGlobalBounds();
+        m_isSelected = bounds.contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y));
+        std::cout << "Button PRESSED";
+
+        // Перевірте, чи було вибрано башту, і встановіть позицію, якщо так
+        if (m_isSelected) {
+            m_selectedTower = createTower();
+            m_selectedTowerPosition = m_sprite.getPosition();
+        }
     }
 }
 
@@ -54,13 +66,11 @@ TowerMenu::TowerMenu()
 
       m_backgroundSprite.setPosition(795.0f, 130.0f);
 
-        //arrangeTowers();
 
         std::vector<sf::Vector2f> towerPositions = {
     sf::Vector2f(719.0f, 140.0f),
     sf::Vector2f(727.0f, 220.0f),
     sf::Vector2f(678.0f, 330.0f),
-    // ... інші позиції за необхідності
         };
         arrangeTowers(towerPositions);
 }
@@ -78,12 +88,14 @@ void TowerMenu::draw(sf::RenderWindow& window)
 
 void TowerMenu::handleSelection(sf::Vector2i mousePosition,sf::RenderWindow& window)
 {
+    std::cout << "Handling selection..." << std::endl;
     for (auto& towerItem : m_towerItems) {
         towerItem.handleEvent(mousePosition, window);
         if (towerItem.isSelected()) {
-            //m_selectedTower = towerItem.getTower();
-            m_selectedTower = towerItem.getSelectedTower();
+            m_selectedTower = towerItem.getTower();
+            //m_selectedTower = towerItem.getSelectedTower();
             m_selectedTowerPosition = towerItem.getSelectedTowerPosition();
+            std::cout << "Button PRESSED";
             break;
         }
     }
@@ -117,19 +129,19 @@ void TowerMenu::handleEvent(sf::Event& event, sf::RenderWindow& window)
     }
 }
 
-void TowerMenu::arrangeTowers()
-{
-    float x = 719.0f; // початкова позиція X
-    float y = 140.0f; // початкова позиція Y
-
-    for (auto& item : m_towerItems) {
-        Tower* tower = item.getTower();
-        tower->setPosition(sf::Vector2f(x, y));
-        tower->setScale();
-        y += 80.0f; // відступ між баштами
-    }
-  
-}
+//void TowerMenu::arrangeTowers()
+//{
+//    float x = 719.0f; // початкова позиція X
+//    float y = 140.0f; // початкова позиція Y
+//
+//    for (auto& item : m_towerItems) {
+//        Tower* tower = item.getTower();
+//        tower->setPosition(sf::Vector2f(x, y));
+//        tower->setScale();
+//        y += 80.0f; // відступ між баштами
+//    }
+//  
+//}
 
 void TowerMenu::arrangeTowers(const std::vector<sf::Vector2f>& positions)
 {
