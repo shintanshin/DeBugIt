@@ -32,33 +32,9 @@ FirstWave::FirstWave(unsigned int numMonsters)
         yOffset += 40.0f;
     }
   
-  /*  for (unsigned int i = 0; i < numMonsters; ++i)
-    {
-        if (i < m_targets.size())
-            monsters[i]->setTargets({ m_targets[i] });
-    }*/
+
 }
 
-//void FirstWave::update(float deltaTime)
-//{
-//
-//    for (auto& monster : m_monstersWave1DB)
-//    {
-//        if (monster) // перевірка на нульовий вказівник
-//        {
-//            // Виберіть конкретну цільову позицію для кожного монстра
-//            sf::Vector2f targetPosition = m_targets[m_currentTargetIndex];
-//
-//            // Викликайте moveTo для кожного монстра
-//            monster->update(deltaTime);
-//            moveTo(*monster, m_targets[m_currentTargetIndex], deltaTime);
-//
-//            if (monster->getPosition() == m_targets[m_currentTargetIndex]) {
-//                m_currentTargetIndex = (m_currentTargetIndex + 1) % m_targets.size();
-//            }
-//        }
-//    }
-//}
 
 void FirstWave::update(float deltaTime)
 {

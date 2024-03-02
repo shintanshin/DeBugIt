@@ -33,9 +33,7 @@ public:
     sf::Vector2f getPosition() const{ return m_spriteBee.getPosition();}
     void setPosition(const sf::Vector2f& position){ m_spriteBee.setPosition(position); }
 
-    //std::vector<sf::Vector2f> getTargets() const override { return targets; }
     virtual void setTargets(const std::vector<sf::Vector2f>& targets) override {}
-    //virtual void setTargets(const std::vector<sf::Vector2f>& newTargets) override { }
 
     float getSpeed() override { return m_speed; }
 
@@ -55,16 +53,6 @@ private:
 
     float m_movementTimer;
 
-    /*void loadTextures() {
-        m_texturesBee.reserve(13); 
-
-        for (int i = 0; i < 13; ++i)
-        {
-            sf::Texture texture;
-            texture.loadFromFile("Bee_sprites/skeleton-animation_" + std::to_string(i) + ".png");
-            m_texturesBee.push_back(texture);
-        }
-    }*/
 
     int m_numHealth;
     int m_pathIdx;
@@ -108,17 +96,6 @@ private:
     std::vector<sf::Vector2f> targets;
 
     float m_movementTimer;
-
-    /*void loadTextures() {
-        m_texturesBug.reserve(16); 
-
-        for (int i = 0; i < 16; ++i)
-        {
-            sf::Texture texture;
-            texture.loadFromFile("Purple_Bug_Sprites/skeleton-animation_" + std::to_string(i) + ".png");
-            m_texturesBug.push_back(texture);
-        }
-    }*/
 
     int m_numHealth;
 

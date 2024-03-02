@@ -22,7 +22,7 @@ void BuildPlace::handleEvent(sf::Event& event, sf::RenderWindow& window, TowerMe
                 // Тут ви можете викликати код для вибору башти (наприклад, вибір PotatoTower)
                 std::cout << "Button PRESSED";
                 towerMenu.handleSelection(mousePosition, window);
-                Tower* selectedTower = towerMenu.getSelectedTower();
+                //Tower* selectedTower = towerMenu.getSelectedTower();
 
                 towerMenu.setDrawEnabled(true);
                
@@ -31,8 +31,8 @@ void BuildPlace::handleEvent(sf::Event& event, sf::RenderWindow& window, TowerMe
     }
 }
 
-bool BuildPlace::isClicked(const sf::Vector2i& mousePosition) const
-{
-    sf::FloatRect bounds = m_spriteBuildPlace.getGlobalBounds();
-    return bounds.contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y));
-}
+//bool BuildPlace::isClicked(const sf::Vector2i& mousePosition) const
+//{
+//    sf::FloatRect bounds = m_spriteBuildPlace.getGlobalBounds();
+//    return bounds.contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y));
+//}

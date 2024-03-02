@@ -14,7 +14,7 @@ public:
 
 	void handleEvent(sf::Event& event, sf::RenderWindow& window, TowerMenu& towerMenu);
 
-	bool isClicked(const sf::Vector2i& mousePosition) const;
+	//bool isClicked(const sf::Vector2i& mousePosition) const;
 	sf::Vector2f getPosition() const { return m_spriteBuildPlace.getPosition(); }
 
 private:

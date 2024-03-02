@@ -4,18 +4,18 @@
 #include "Wave.h"
 
 
-class GameWorld
-{
-//public:
-//	GameWorld(sf::RenderWindow* window);
-//	~GameWorld() {};
-//
-//	//void blur();
-//	//void unblur();
-//
-//	void update(float DeltaTime);
-//	void draw(sf::RenderWindow& window);
-//
-//private:
-//	std::vector <Wave*> m_wave;
-};
+//class GameWorld
+//{
+////public:
+////	GameWorld(sf::RenderWindow* window);
+////	~GameWorld() {};
+////
+////	//void blur();
+////	//void unblur();
+////
+////	void update(float DeltaTime);
+////	void draw(sf::RenderWindow& window);
+////
+////private:
+////	std::vector <Wave*> m_wave;
+//};
