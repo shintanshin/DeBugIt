@@ -16,6 +16,8 @@ public:
 	virtual void setScale() = 0;
 	virtual const sf::Vector2f& getPosition() const = 0;
 	virtual sf::FloatRect getGlobalBounds() const = 0;
+
+	virtual Tower* clone() = 0;
 };
 
 class PotatoTower : public Tower
@@ -30,6 +32,10 @@ public:
 	void update(float deltaTime)override;
 
 	sf::FloatRect getGlobalBounds() const override {return m_spritePotatoT.getGlobalBounds();}
+
+	PotatoTower* clone()  override {
+		return new PotatoTower(*this);
+	}
 
 private:
 	std::vector<sf::Texture> m_texturePotatoT;
@@ -56,6 +62,10 @@ public:
 		return m_spriteCornT.getGlobalBounds();
 	}
 
+	CornTower* clone()  override {
+		return new CornTower(*this);
+	}
+
 private:
 	sf::Texture m_textureCornT;
 	sf::Sprite m_spriteCornT;
@@ -74,6 +84,10 @@ public:
 
 	sf::FloatRect getGlobalBounds() const override {
 		return m_spriteTrunkT.getGlobalBounds();
+	}
+
+	TrunkTower* clone()  override {
+		return new TrunkTower(*this);
 	}
 
 private:

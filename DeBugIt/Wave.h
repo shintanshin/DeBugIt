@@ -33,10 +33,5 @@ private:
     std::vector<sf::Vector2f> m_targets;
 
     unsigned int m_currentTargetIndex;
-    
-    float m_monsterCreationTimer;
-
-    std::vector<Monster*> m_monstersWave1DB;
-
-
+  
 };

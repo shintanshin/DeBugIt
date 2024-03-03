@@ -12,25 +12,25 @@
 #include "Tower.h"
 #include "Menu.h"
 
-void handleSystemEvents(sf::RenderWindow& window)
-{
-
-    sf::Event event;
-    while (window.pollEvent(event))
-    {
-        switch (event.type)
-        {
-        case sf::Event::Closed:
-            window.close();
-            break;
-        case sf::Event::KeyPressed:
-            if (event.key.code == sf::Keyboard::Key::Escape)
-                window.close();
-        default:
-            break;
-        }
-    }
-}
+//void handleSystemEvents(sf::RenderWindow& window)
+//{
+//
+//    sf::Event event;
+//    while (window.pollEvent(event))
+//    {
+//        switch (event.type)
+//        {
+//        case sf::Event::Closed:
+//            window.close();
+//            break;
+//        case sf::Event::KeyPressed:
+//            if (event.key.code == sf::Keyboard::Key::Escape)
+//                window.close();
+//        default:
+//            break;
+//        }
+//    }
+//}
 
 
 int main()

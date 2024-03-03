@@ -9,10 +9,13 @@ PotatoTower::PotatoTower()
 		texture.loadFromFile("Textures/PotatoTower/Potato" + std::to_string(i) + ".png");
 		m_texturePotatoT.push_back(texture);
 	}
+	m_currentTextureIndex = 0;
+	m_elapsed = 0.0f;
+	m_frameDuration = 0.5f;
 	m_spritePotatoT.setTexture(m_texturePotatoT[m_currentTextureIndex]);
-	//setPosition(sf::Vector2f(353, 115));
-	//setPosition(sf::Vector2f(353, 215));
 	setScale();
+	setPosition(sf::Vector2f(453, 115));
+
 }
 void PotatoTower::update(float deltaTime)
 {
@@ -20,9 +23,10 @@ void PotatoTower::update(float deltaTime)
 
     if (m_elapsed >= m_frameDuration)
     {
+		m_elapsed -= m_frameDuration;
         m_currentTextureIndex = (m_currentTextureIndex + 1) % m_texturePotatoT.size();
         m_spritePotatoT.setTexture(m_texturePotatoT[m_currentTextureIndex]);
-        m_elapsed = 0.0f;
+        //m_elapsed = 0.0f;
     }
 }
 

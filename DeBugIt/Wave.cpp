@@ -4,7 +4,7 @@
 #include <chrono>
 
 FirstWave::FirstWave(unsigned int numMonsters)
-    :m_currentTargetIndex(0), m_monsterCreationTimer(0.0f)
+    :m_currentTargetIndex(0)
 {
     m_targets = { sf::Vector2f(40, 100), sf::Vector2f(290, 100), sf::Vector2f(290, 285),
                     sf::Vector2f(165, 285), sf::Vector2f(165, 410), sf::Vector2f(590, 410) };
@@ -31,10 +31,7 @@ FirstWave::FirstWave(unsigned int numMonsters)
         }
         yOffset += 40.0f;
     }
-  
-
 }
-
 
 void FirstWave::update(float deltaTime)
 {
@@ -65,7 +62,6 @@ void FirstWave::draw(sf::RenderWindow& window)
     {
         monster->draw(window);
     }
-
 }
 
 sf::Vector2f FirstWave::normalize(const sf::Vector2f& vector)
