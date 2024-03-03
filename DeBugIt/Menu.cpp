@@ -6,7 +6,7 @@ void TowerMenuItem::draw(sf::RenderWindow& window)
 {
     window.draw(m_sprite);
         if (m_isSelected) {
-            // Тут можна намалювати позначку (наприклад, рамку) для вибраного спрайту
+            
         }
 }
 
@@ -76,7 +76,7 @@ void TowerMenu::handleEvent(sf::Event& event, sf::RenderWindow& window)
     static bool mousePressed = false;
 
     if (event.type == sf::Event::MouseButtonPressed && !mousePressed) {
-        mousePressed = true;  // Встановіть флаг, що миша натиснута
+        mousePressed = true;  
         sf::Vector2i mousePosition = sf::Mouse::getPosition(window);
 
         sf::FloatRect menuBounds = m_backgroundSprite.getGlobalBounds();
@@ -84,19 +84,19 @@ void TowerMenu::handleEvent(sf::Event& event, sf::RenderWindow& window)
         if (menuBounds.contains(static_cast<float>(mousePosition.x), static_cast<float>(mousePosition.y))) {
             for (auto& item : m_towerItems) {
                 item.handleEvent(mousePosition, window);
-                std::cout << "Item isSelected: " << item.isSelected() << std::endl;
                 if (item.isSelected()) {
+                std::cout << "Item isSelected: " << item.isSelected() << std::endl;
                     m_selectedTower = item.getTower();
                     std::cout << "Tower Type isSelected: " << item.getTowerType() << std::endl;
                     std::cout << "Button PRESSED\n";
-                    m_drawEnabled = false;  // Закриваємо меню башт після вибору
+                    m_drawEnabled = false;  
                     break;
                 }
             }
         }
     }
     else if (event.type == sf::Event::MouseButtonReleased) {
-        mousePressed = false;  // Скидайте флаг, коли миша відпущена
+        mousePressed = false; 
         std::cout << "Button RELEASED\n";
     }
 
@@ -105,6 +105,17 @@ void TowerMenu::handleEvent(sf::Event& event, sf::RenderWindow& window)
 void TowerMenu::arrangeTowers(const std::vector<sf::Vector2f>& positions)
 {
 }
+//void TowerMenu::buildSelectedTower(BuildPlace& buildPlace,  std::vector<std::unique_ptr<BuildPlace>>& buildPlaces)
+//{
+//    auto selectedTowerItem = std::find_if(m_towerItems.begin(), m_towerItems.end(), [](const TowerMenuItem& item) {
+//        return item.isSelected();
+//        });
+//
+//    if (selectedTowerItem != m_towerItems.end()) {
+//        TowerType selectedTowerType = selectedTowerItem->getTowerType();
+//        buildPlace.buildTower(selectedTowerType, buildPlaces);
+//    }
+//}
 void TowerMenu::buildSelectedTower(BuildPlace& buildPlace)
 {
     auto selectedTowerItem = std::find_if(m_towerItems.begin(), m_towerItems.end(), [](const TowerMenuItem& item) {
@@ -116,3 +127,4 @@ void TowerMenu::buildSelectedTower(BuildPlace& buildPlace)
         buildPlace.buildTower(selectedTowerType);
     }
 }
+

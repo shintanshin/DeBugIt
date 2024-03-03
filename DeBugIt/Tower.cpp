@@ -3,7 +3,7 @@
 PotatoTower::PotatoTower()
 {
 
-	for (int i = 0; i < 3; i++)
+	for (int i = 0; i < 4; i++)
 	{
 		sf::Texture texture;
 		texture.loadFromFile("Textures/PotatoTower/Potato" + std::to_string(i) + ".png");

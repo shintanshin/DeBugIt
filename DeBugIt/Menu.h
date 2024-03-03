@@ -84,7 +84,7 @@ public:
     Tower* getSelectedTower() const {
         return m_selectedTower;
     }
-
+    //void buildSelectedTower(BuildPlace& buildPlace,  std::vector<std::unique_ptr<BuildPlace>>& buildPlaces);
 
 private:
     std::vector<TowerMenuItem> m_towerItems;

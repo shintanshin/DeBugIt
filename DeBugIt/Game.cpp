@@ -33,8 +33,8 @@ void Game::run()
 
     Base base;
     base.setScale();
-    BuildPlace place;
     BuildPlaces places;
+    //BuildPlace place(&places);
 
     //Bee bee;
     //PurpleBug bug;
@@ -64,22 +64,20 @@ void Game::run()
             case GameStateId::TitleScreen:
                 break;
             case GameStateId::Playing:
-                // Викликайте ваш існуючий код для обробки подій BuildPlace
                 //buildPlace.handleEvent(event, window, towerMenu);
                 places.handleEvent(event, window, towerMenu);
                 if (towerMenu.getDrawEnabled()) {
                     m_currentState = GameStateId::TowerMenu;
                 }
-              
+                //towerMenu.buildSelectedTower(place, places.getBuildPlaces());
                 break;
             case GameStateId::TowerMenu:
-                // Обробка подій для стану вибору башти
                 towerMenu.handleEvent(event, window);
                 if (!towerMenu.getDrawEnabled()) {
-                    towerMenu.buildSelectedTower(place);
+                    //towerMenu.buildSelectedTower(place, places.getBuildPlaces());
+                    towerMenu.buildSelectedTower(*places.getSelectedBuildPlace());
                     //buildPlace.buildTower(type);
                     m_currentState = GameStateId::Playing;
-                    // Будуємо обрану башту
                 }
                 if (sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Escape) {
                
@@ -87,34 +85,29 @@ void Game::run()
                     m_currentState = GameStateId::Playing;
                 }
                 break;
-                // Обробка інших станів гри...
             default:
                 break;
             }
         }
         switch (m_currentState) {
         case GameStateId::TitleScreen:
-            // Відображення екрану заголовка
             break;
         case GameStateId::Playing:
             //potatoT.draw(window);
-        potatoT.update(deltaTime);
-            // Відображення стану гри "Playing"
+            potatoT.update(deltaTime);
             wave.update(deltaTime * 5);
             
             break;
         case GameStateId::TowerMenu:
-            // Відображення меню вибору башти
           
             break;
-            // Відображення інших станів гри...
         default:
             break;
         }
         window.clear();
         window.draw(LvlTexture);
         base.draw(window);
-        place.draw(window);
+        //place.draw(window);
         places.draw(window);
         towerMenu.draw(window);
         //potatoT.draw(window);
