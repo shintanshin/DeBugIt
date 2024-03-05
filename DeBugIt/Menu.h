@@ -35,6 +35,7 @@ public:
 
     bool isSelected() const { return m_isSelected; }
     void setSelected(bool selected) { m_isSelected = selected; }
+    void resetSelection() { m_isSelected = false;}
     
     void handleEvent(sf::Vector2i mousePosition, sf::RenderWindow& window);
     sf::Vector2f getSelectedTowerPosition() const { return m_selectedTowerPosition; }
@@ -70,14 +71,14 @@ public:
     TowerMenu();
 
     void draw(sf::RenderWindow& window) override;
-    void resetSelection();
+    //void resetSelection();
 
     bool getDrawEnabled() const { return m_drawEnabled; }
     void setDrawEnabled(bool drawEnabled) { m_drawEnabled = drawEnabled; }
 
     void handleEvent(sf::Event& event, sf::RenderWindow& window);
 
-    void arrangeTowers(const std::vector<sf::Vector2f>& positions);
+    //void arrangeTowers(const std::vector<sf::Vector2f>& positions);
 
     void buildSelectedTower(BuildPlace& buildPlace);
 
@@ -85,6 +86,13 @@ public:
         return m_selectedTower;
     }
     //void buildSelectedTower(BuildPlace& buildPlace,  std::vector<std::unique_ptr<BuildPlace>>& buildPlaces);
+
+    void resetSelection()
+    {
+        for (auto& item : m_towerItems) {
+            item.resetSelection();
+        }
+    }
 
 private:
     std::vector<TowerMenuItem> m_towerItems;

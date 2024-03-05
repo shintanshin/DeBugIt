@@ -17,7 +17,9 @@ public:
 	virtual const sf::Vector2f& getPosition() const = 0;
 	virtual sf::FloatRect getGlobalBounds() const = 0;
 
-	virtual Tower* clone() = 0;
+	virtual bool getDrawEnabled() const =0;
+	virtual void setDrawEnabled(bool drawEnabled) = 0;
+
 };
 
 class PotatoTower : public Tower
@@ -28,14 +30,13 @@ public:
 
 	const sf::Vector2f& getPosition() const override {return m_spritePotatoT.getPosition();}
 	void setPosition(const sf::Vector2f& position) override { m_spritePotatoT.setPosition(position); }
-	void draw(sf::RenderWindow& window) override { window.draw(m_spritePotatoT); }
+	void draw(sf::RenderWindow& window) override { if (m_drawEnabled) { window.draw(m_spritePotatoT); } }
 	void update(float deltaTime)override;
 
 	sf::FloatRect getGlobalBounds() const override {return m_spritePotatoT.getGlobalBounds();}
 
-	PotatoTower* clone()  override {
-		return new PotatoTower(*this);
-	}
+	bool getDrawEnabled() const override { return m_drawEnabled; }
+	void setDrawEnabled(bool drawEnabled) override { m_drawEnabled = drawEnabled; }
 
 private:
 	std::vector<sf::Texture> m_texturePotatoT;
@@ -44,6 +45,8 @@ private:
 	int m_currentTextureIndex;
 	float m_elapsed;
 	float m_frameDuration;
+
+	bool m_drawEnabled=false;
 };
 
 class CornTower : public Tower
@@ -51,24 +54,32 @@ class CornTower : public Tower
 public:
 	CornTower();
 
+	CornTower(TowerType type, const sf::Vector2f& position);
+	~CornTower();
+
 	void setScale() override { m_spriteCornT.setScale(0.9f, 0.9f); }
 
 	const sf::Vector2f& getPosition() const override { return m_spriteCornT.getPosition(); }
 	void setPosition(const sf::Vector2f& position) override { m_spriteCornT.setPosition(position); }
-	void draw(sf::RenderWindow& window) override { window.draw(m_spriteCornT); }
+	void draw(sf::RenderWindow& window) override {
+		if (m_drawEnabled) { window.draw(m_spriteCornT); }
+	}
 	void update(float deltaTime)override{}
 
 	sf::FloatRect getGlobalBounds() const override {
 		return m_spriteCornT.getGlobalBounds();
 	}
 
-	CornTower* clone()  override {
-		return new CornTower(*this);
-	}
+	bool getDrawEnabled() const override { return m_drawEnabled; }
+	void setDrawEnabled(bool drawEnabled) override { m_drawEnabled = drawEnabled; }
 
 private:
 	sf::Texture m_textureCornT;
 	sf::Sprite m_spriteCornT;
+
+	bool m_drawEnabled;
+	TowerType m_type;
+	const sf::Vector2f& m_pos;
 };
 
 class TrunkTower : public Tower
@@ -79,18 +90,19 @@ public:
 
 	const sf::Vector2f& getPosition() const override { return m_spriteTrunkT.getPosition(); }
 	void setPosition(const sf::Vector2f& position) override { m_spriteTrunkT.setPosition(position); }
-	void draw(sf::RenderWindow& window) override { window.draw(m_spriteTrunkT); }
+	void draw(sf::RenderWindow& window) override { if (m_drawEnabled) { window.draw(m_spriteTrunkT); } }
 	void update(float deltaTime)override {}
 
 	sf::FloatRect getGlobalBounds() const override {
 		return m_spriteTrunkT.getGlobalBounds();
 	}
 
-	TrunkTower* clone()  override {
-		return new TrunkTower(*this);
-	}
+	bool getDrawEnabled() const override { return m_drawEnabled; }
+	void setDrawEnabled(bool drawEnabled) override { m_drawEnabled = drawEnabled; }
 
 private:
 	sf::Texture m_textureTrunkT;
 	sf::Sprite m_spriteTrunkT;
+
+	bool m_drawEnabled;
 };

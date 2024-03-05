@@ -1,9 +1,9 @@
 #include "Tower.h"
 
-PotatoTower::PotatoTower()
+PotatoTower::PotatoTower() : m_drawEnabled(false)
 {
 
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < 3; i++)
 	{
 		sf::Texture texture;
 		texture.loadFromFile("Textures/PotatoTower/Potato" + std::to_string(i) + ".png");
@@ -14,7 +14,7 @@ PotatoTower::PotatoTower()
 	m_frameDuration = 0.5f;
 	m_spritePotatoT.setTexture(m_texturePotatoT[m_currentTextureIndex]);
 	setScale();
-	setPosition(sf::Vector2f(453, 115));
+	setDrawEnabled(false);
 
 }
 void PotatoTower::update(float deltaTime)
@@ -26,24 +26,33 @@ void PotatoTower::update(float deltaTime)
 		m_elapsed -= m_frameDuration;
         m_currentTextureIndex = (m_currentTextureIndex + 1) % m_texturePotatoT.size();
         m_spritePotatoT.setTexture(m_texturePotatoT[m_currentTextureIndex]);
-        //m_elapsed = 0.0f;
+        m_elapsed = 0.0f;
     }
 }
 
 CornTower::CornTower()
 {
 
+	/*m_textureCornT.loadFromFile("Textures/CornTower/Corn0.png");
+	m_spriteCornT.setTexture(m_textureCornT);
+	void setScale();*/
+}
+
+CornTower::CornTower(TowerType type, const sf::Vector2f& pos): m_type(type), m_pos (pos), m_drawEnabled(false)
+{
 	m_textureCornT.loadFromFile("Textures/CornTower/Corn0.png");
 	m_spriteCornT.setTexture(m_textureCornT);
-	//setPosition(sf::Vector2f(453, 115));
 	void setScale();
 }
 
-TrunkTower::TrunkTower()
+CornTower::~CornTower()
+{
+}
+
+TrunkTower::TrunkTower() : m_drawEnabled(false)
 {
 
 	m_textureTrunkT.loadFromFile("Textures/TrunkTower/Trunk0.png");
 	m_spriteTrunkT.setTexture(m_textureTrunkT);
-	//setPosition(sf::Vector2f(253, 115));
 	void setScale();
 }

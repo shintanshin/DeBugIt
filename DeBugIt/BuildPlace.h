@@ -28,6 +28,10 @@ public:
 
 	bool getIsSelected() const{return m_isSelected;}
 
+	const std::vector<Tower*>& getTowers() const {
+		return towers;
+	}
+
 private:
 	bool m_isSelected = false;
 	sf::Texture m_textureBuildPlace;
@@ -36,6 +40,7 @@ private:
 	Tower* m_selectedTower;
 
 	BuildPlaces* m_buildPlaces;
+	std::vector<Tower*> towers;
 };
 
 class BuildPlaces {
@@ -50,6 +55,16 @@ public:
 	BuildPlace* getSelectedBuildPlace();
 
 	 void removeBuildPlace(const BuildPlace* buildPlace);
+
+	 std::vector<Tower*> getAllTowers() const {
+		 std::vector<Tower*> allTowers;
+		 for (const auto& buildPlace : m_buildPlaces) {
+			 const auto& towers = buildPlace->getTowers();
+			 allTowers.insert(allTowers.end(), towers.begin(), towers.end());
+		 }
+
+		 return allTowers;
+	 }
 private:
 	std::vector<std::unique_ptr<BuildPlace>> m_buildPlaces;
 

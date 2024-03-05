@@ -41,6 +41,7 @@ void BuildPlace::buildTower(TowerType towerType)
         break;
     case TowerType::CORN:
         newTower = new CornTower();
+        //newTower = new CornTower(CORN, newTower->setPosition(getPosition()));
         break;
     case TowerType::TRUNK:
         newTower = new TrunkTower();
@@ -52,15 +53,36 @@ void BuildPlace::buildTower(TowerType towerType)
     if (newTower) {
         newTower->setPosition(getPosition());
         newTower->setScale();
-        setSelectedTower(newTower);
+        newTower->setDrawEnabled(true);
+        newTower->getDrawEnabled();
+        //setSelectedTower(newTower);
+        towers.push_back(newTower);
+
+        std::string towerTypeName; // for debug
+        switch (towerType) {
+        case TowerType::POTATO:
+            towerTypeName = "PotatoTower";
+            break;
+        case TowerType::CORN:
+            towerTypeName = "CornTower";
+            break;
+        case TowerType::TRUNK:
+            towerTypeName = "TrunkTower";
+            break;
+        default:
+            break;
+        }
+
+        std::cout << "BuildPlace position: " << getPosition().x << ", " << getPosition().y << std::endl;
+        std::cout << towerTypeName << " position: " << newTower->getPosition().x << ", " << newTower->getPosition().y << std::endl;
+        std::cout << towerTypeName << " global bounds: " << newTower->getGlobalBounds().left << ", " << newTower->getGlobalBounds().top << std::endl;
+        std::cout << towerTypeName << " drawEnabled: " << newTower->getDrawEnabled() << std::endl;
     }
     if (m_buildPlaces) {
         std::cout << "Removing BuildPlace at position: " << getPosition().x << ", " << getPosition().y << std::endl;
         m_buildPlaces->removeBuildPlace(this);
     }
-    else {
-        std::cout << "m_buildPlaces is nullptr" << std::endl;
-    }
+   
 }
 
 //void BuildPlace::buildTower(TowerType towerType, std::vector<std::unique_ptr<BuildPlace>>& buildPlaces)
